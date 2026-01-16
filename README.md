@@ -1,27 +1,25 @@
-# MNIST Neural Network (PyTorch)
+# MNIST Quantum Neural Network (TorchQuantum)
 
-Just a simple AF fully connected neural network trained on the MNIST dataset using PyTorch 
+A hybrid quantum-classical MNIST classifier built with PyTorch + TorchQuantum.
 
 ## The Pertinents
 
 - Loads and preprocesses the MNIST handwritten digits dataset
-- Defines and trains a basic feedforward neural network
+- Defines a hybrid model with a classical feature projector + variational quantum circuit
 - Saves and loads model weights
 - Evaluates performance on test data
-
-## Accuracy
-Achieved **~89.5%** accuracy on the MNIST test set using GPU training
 
 ## Stack
 - Python 3.10
 - PyTorch
+- TorchQuantum
 - Jupyter Notebook (for experimenting and "Quantum-fying")
 - VS Code
 - Git + GitHub
 
 ## Files
-- `mnist_nn.py`: Main training and inference code
-- `mnist_simple_nn.pth`: Trained model weights
+- `mnist_nn.py`: Main training and inference code (quantum model)
+- `mnist_quantum_nn.pth`: Trained model weights
 - `notebooks/`: Optional Jupyter versions of the project (Gonna be messy - will be using this for Quantum ML experimenting)
 
 ## Run this project
@@ -29,4 +27,6 @@ Achieved **~89.5%** accuracy on the MNIST test set using GPU training
 From the terminal:
 
 ```bash
+pip install torchquantum
 python mnist_nn.py
+```
