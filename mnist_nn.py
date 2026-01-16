@@ -1,6 +1,7 @@
 # Eros Marcello | Quantum MNIST classifier using TorchQuantum.
 
 import math
+from typing import Tuple
 import torch
 import torch.nn as nn
 import torch.optim as optim
@@ -13,6 +14,8 @@ import matplotlib.pyplot as plt  # For visualization later
 # Use GPU if available else CPU
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 print(f"Using device: {device}")
+
+torch.manual_seed(0)
 
 # --- Data Loading ---
 # Standard MNIST transform: ToTensor scales to [0, 1]
@@ -74,6 +77,21 @@ class QuantumMNIST(nn.Module):
         return x
 
 
+def evaluate_accuracy(model: nn.Module, loader: DataLoader) -> Tuple[float, int]:
+    model.eval()
+    correct = 0
+    total = 0
+    with torch.no_grad():
+        for images, labels in loader:
+            images, labels = images.to(device), labels.to(device)
+            logits = model(images)
+            predictions = torch.argmax(logits, dim=1)
+            correct += (predictions == labels).sum().item()
+            total += labels.size(0)
+    accuracy = correct / total if total else 0.0
+    return accuracy, total
+
+
 # Instantiate model and move to target device
 model = QuantumMNIST().to(device)
 
@@ -105,6 +123,9 @@ for epoch in range(epochs):
     print(f"Epoch {epoch+1}/{epochs}, Loss: {avg_loss:.4f}")  # Log progress.
 
 print("Finished training.")
+
+test_accuracy, test_samples = evaluate_accuracy(model, test_loader)
+print(f"Test accuracy: {test_accuracy:.4f} on {test_samples} samples")
 
 # --- Save Model State ---
 # Save only the model weights (state_dict). Efficient.
