@@ -13,8 +13,8 @@ A hybrid quantum-classical MNIST classifier built with PyTorch + TorchQuantum.
 - Python 3.10
 - PyTorch
 - TorchQuantum
-- Jupyter Notebook (for experimenting and "Quantum-fying")
-- VS Code
+- Jupyter Notebook (for experimenting and quantum vs. classical models)
+- VS Code / Cursor 
 - Git + GitHub
 
 ## Files
